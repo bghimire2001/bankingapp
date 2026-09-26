@@ -6,6 +6,7 @@ package bankingapp.model;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.math.BigDecimal;
+import java.util.HashSet;
 
 class MoneyTest {
     @Test void positiveMoney() {
@@ -36,10 +37,20 @@ class MoneyTest {
         Money n = new Money(new BigDecimal(100), "dollars");
         assertEquals("200 dollars",  m.add(n).toString());
     }
+    @Test void addMoneyDiffCurrency(){
+        Money m = new Money(new BigDecimal(100), "dollars");
+        Money n = new Money(new BigDecimal(100), "euros");
+        assertThrows(IllegalArgumentException.class, () -> m.add(n));
+    }
     @Test void subtractMoney(){
         Money m = new Money(new BigDecimal(100), "dollars");
         Money n = new Money(new BigDecimal(100), "dollars");
         assertEquals("0 dollars",  m.subtract(n).toString());
+    }
+    @Test void subtractMoneyDiffCurrency(){
+        Money m = new Money(new BigDecimal(100), "dollars");
+        Money n = new Money(new BigDecimal(100), "euros");
+        assertThrows(IllegalArgumentException.class, () -> m.subtract(n));
     }
     @Test void subtractMoneyNegativeResult(){
         Money m = new Money(new BigDecimal(100), "dollars");
@@ -56,10 +67,20 @@ class MoneyTest {
         Money n = new Money(new BigDecimal(200), "dollars");
         assertEquals(false,  m.equals(n));
     }
+    @Test void equalsMoneyDiffCurrency(){
+        Money m = new Money(new BigDecimal(100), "dollars");
+        Money n = new Money(new BigDecimal(200), "euros");
+        assertThrows(IllegalArgumentException.class, () -> m.equals(n));
+    }
     @Test void compareMoney(){
         Money m = new Money(new BigDecimal(100), "dollars");
         Money n = new Money(new BigDecimal(100), "dollars");
         assertEquals(0,  m.compareTo(n));
+    }
+    @Test void compareMoneyDiffCurrency(){
+        Money m = new Money(new BigDecimal(100), "dollars");
+        Money n = new Money(new BigDecimal(100), "euro");
+        assertThrows(IllegalArgumentException.class, () -> m.compareTo(n));
     }
     @Test void compareMoneyNegativeDifference(){
         Money m = new Money(new BigDecimal(150), "dollars");
@@ -80,5 +101,14 @@ class MoneyTest {
         Money m = new Money(new BigDecimal(101), "dollars");
         Money n = new Money(new BigDecimal(100.50), "dollars");
         assertEquals(true,  m.compareTo(n) > 0);
+    }
+    @Test void hashSetMoney(){
+        HashSet<Money> h = new HashSet<Money>();
+        Money m = new Money(new BigDecimal(101), "dollars");
+        h.add(m);
+        Money n  = new Money(new BigDecimal(101.0), "dollars");
+        h.add(n);
+        assertTrue(h.size() == 1);
+
     }
 }

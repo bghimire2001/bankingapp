@@ -16,9 +16,15 @@ public final class Money implements Comparable<Money> {
     }
 
     public Money add(Money other){
+        if(!(other.crncy.equals(crncy))){
+            throw new IllegalArgumentException("Invalid Add - Currencies must be the same");
+        }
         return new Money(amnt.add(other.amnt), crncy);
     }
     public Money subtract(Money other){
+        if(!(other.crncy.equals(crncy))){
+            throw new IllegalArgumentException("Invalid Add - Currencies must be the same");
+        }
         return new Money(amnt.subtract(other.amnt), crncy);
     }
     @Override
@@ -29,7 +35,10 @@ public final class Money implements Comparable<Money> {
         if (!(o instanceof Money other)){
             return false;
         } 
-        return (amnt.equals(other.amnt) && crncy.equals(other.crncy));
+        if(!(other.crncy.equals(crncy))){
+            throw new IllegalArgumentException("Invalid Equals - Currencies must be the same");
+        }
+        return ((amnt.compareTo(other.amnt) == 0) && crncy.equals(other.crncy));
     }
     @Override
     public String toString(){
@@ -37,6 +46,9 @@ public final class Money implements Comparable<Money> {
     }
     @Override
     public int compareTo(Money other){
+        if(!(other.crncy.equals(crncy))){
+            throw new IllegalArgumentException("Invalid Compare - Currencies must be the same");
+        }
         return amnt.compareTo(other.amnt);
     }
     @Override
