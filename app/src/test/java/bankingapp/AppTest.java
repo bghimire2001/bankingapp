@@ -4,11 +4,26 @@
 package bankingapp;
 
 import org.junit.jupiter.api.Test;
+
+import bankingapp.model.Money;
+
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
+
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @Test void positiveMoney() {
+        Money m = new Money(new BigDecimal(100), "dollars");
+        assertEquals(m.toString(), "100 dollars");
     }
+    @Test void negativeMoney(){
+        assertThrows(IllegalArgumentException.class, ()->{
+            new Money(new BigDecimal(-100), "dollars");
+        });
+    }
+    @Test void zeroMoney(){
+        Money m = new Money(new BigDecimal(0), "dollars");
+        assertEquals(m.toString(), "0 dollars");
+    }
+
 }

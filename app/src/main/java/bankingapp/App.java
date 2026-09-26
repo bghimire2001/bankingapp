@@ -3,12 +3,13 @@
  */
 package bankingapp;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import java.math.BigDecimal;
 
+import bankingapp.model.*;
+
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Money m = new Money(new BigDecimal("1e-12"), "dollars");
+        System.out.println(m);
     }
 }
