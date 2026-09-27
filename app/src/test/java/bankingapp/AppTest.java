@@ -3,14 +3,6 @@
  */
 package bankingapp;
 
-import org.junit.jupiter.api.Test;
-
-import bankingapp.model.Money;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.math.BigDecimal;
-
 class AppTest {
 
 }

@@ -9,7 +9,13 @@ import bankingapp.model.*;
 
 public class App {
     public static void main(String[] args) {
-        Money m = new Money(new BigDecimal("1e-12"), "dollars");
-        System.out.println(m);
+        Money initialdeposit = new Money(new BigDecimal(200), "dollars");
+        Money overdraftlimit = new Money(new BigDecimal(100), "dollars");
+        CheckingAccount c = new CheckingAccount(
+            overdraftlimit, initialdeposit, "dollars");
+        
+        Money withdrawalamnt = new Money(new BigDecimal(50), "dollars");
+        c.withdraw(withdrawalamnt);
+        System.out.println(c.toString());
     }
 }
