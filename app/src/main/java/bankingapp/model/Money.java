@@ -27,6 +27,12 @@ public final class Money implements Comparable<Money> {
         }
         return new Money(amnt.subtract(other.amnt), crncy);
     }
+    public Money multiply(BigDecimal multiplicand){
+        if(multiplicand.compareTo(new BigDecimal(0)) < 0){
+            throw new IllegalArgumentException("Invalid Multiply - Both operands must be positive");
+        }
+        return new Money(amnt.multiply(multiplicand), crncy);
+    }
     @Override
     public boolean equals(Object o){
         if(this == o){
