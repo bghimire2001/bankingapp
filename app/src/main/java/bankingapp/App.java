@@ -14,8 +14,7 @@ public class App {
         CheckingAccount c = new CheckingAccount(
             overdraftlimit, initialdeposit, "dollars");
         
-        Money withdrawalamnt = new Money(new BigDecimal(50), "dollars");
-        c.withdraw(withdrawalamnt);
-        System.out.println(c.toString());
+        Money depositamnt = new Money(new BigDecimal(50), "dollars");
+        c.deposit(depositamnt, "HELLO THERE I JUST PUT MONEY");
     }
 }

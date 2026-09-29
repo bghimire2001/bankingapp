@@ -132,4 +132,14 @@ class CheckingAccTest {
         c.deposit(depositamnt3);
         assertEquals("1 dollars", c.toString());
     }
+    @Test void checkingAccountDepositMemo() {
+        Money initialdeposit = new Money(new BigDecimal(200), "dollars");
+        Money overdraftlimit = new Money(new BigDecimal(100), "dollars");
+        CheckingAccount c = new CheckingAccount(
+            overdraftlimit, initialdeposit, "dollars");
+        
+        Money depositamnt = new Money(new BigDecimal(50), "dollars");
+        c.deposit(depositamnt, "HELLO THERE I JUST PUT MONEY");
+        assertEquals("250 dollars", c.toString());
+    }
 }

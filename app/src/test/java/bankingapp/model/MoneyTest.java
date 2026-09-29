@@ -102,6 +102,18 @@ class MoneyTest {
         Money n = new Money(new BigDecimal(100.50), "dollars");
         assertEquals(true,  m.compareTo(n) > 0);
     }
+    @Test void multiplyMoney(){
+        Money m = new Money(new BigDecimal(10), "dollars");
+        BigDecimal rate = new BigDecimal(10);
+        Money res = new Money(new BigDecimal(100), "dollars");
+        assertEquals(res,  m.multiply(rate));
+    }
+    @Test void multiplyNegativeMoney(){
+        Money m = new Money(new BigDecimal(10), "dollars");
+        BigDecimal rate = new BigDecimal(-10);
+        assertThrows(IllegalArgumentException.class, () -> m.multiply(rate));
+        }
+
     @Test void hashSetMoney(){
         HashSet<Money> h = new HashSet<Money>();
         Money m = new Money(new BigDecimal(101), "dollars");

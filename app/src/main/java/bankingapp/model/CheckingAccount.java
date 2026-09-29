@@ -31,7 +31,15 @@ public class CheckingAccount extends Account{
         } else{
             balance = balance.add(depositAmount.subtract(overdraftAmount));
             overdraftAmount = new Money(new BigDecimal(0), accountCurrency);
-
         }
+    }
+    public void deposit(Money depositAmount, String memo){
+        if(depositAmount.compareTo(overdraftAmount) <= 0){
+            overdraftAmount = overdraftAmount.subtract(depositAmount);
+        } else{
+            balance = balance.add(depositAmount.subtract(overdraftAmount));
+            overdraftAmount = new Money(new BigDecimal(0), accountCurrency);
+        }
+        System.out.println(memo);
     }
 }
