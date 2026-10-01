@@ -11,7 +11,7 @@ public class SavingsAccTest {
         SavingsAccount s = new SavingsAccount(
             initialdeposit, "dollars", new BigDecimal(2.0));
         
-        assertEquals(s.toString(), "100 dollars");
+        assertEquals(new Money(new BigDecimal(100), "dollars"), s.balance);
     }
     @Test void depositSavingsAccount() {
         Money initialdeposit = new Money(new BigDecimal(100), "dollars");
@@ -20,7 +20,7 @@ public class SavingsAccTest {
         
         Money savingsdeposit = new Money(new BigDecimal(100), "dollars");
         s.deposit(savingsdeposit);
-        assertEquals(s.toString(), "200 dollars");
+        assertEquals(new Money(new BigDecimal(200), "dollars"), s.balance);
     }
     @Test void validWithdrawSavingsAccount() {
         Money initialdeposit = new Money(new BigDecimal(100), "dollars");
@@ -29,7 +29,7 @@ public class SavingsAccTest {
         
         Money savingsdeposit = new Money(new BigDecimal(100), "dollars");
         s.deposit(savingsdeposit);
-        assertEquals(s.toString(), "200 dollars");
+        assertEquals(new Money(new BigDecimal(200), "dollars"), s.balance);
         
         Money savingswithdrawal = new Money(new BigDecimal(100), "dollars");
         assertTrue(s.withdraw(savingswithdrawal));
@@ -41,7 +41,7 @@ public class SavingsAccTest {
         
         Money savingsdeposit = new Money(new BigDecimal(100), "dollars");
         s.deposit(savingsdeposit);
-        assertEquals(s.toString(), "200 dollars");
+        assertEquals(new Money(new BigDecimal(200), "dollars"), s.balance);
         
         Money savingswithdrawal = new Money(new BigDecimal(1000), "dollars");
         assertFalse(s.withdraw(savingswithdrawal));
@@ -59,7 +59,7 @@ public class SavingsAccTest {
         s.deposit(savingsdeposit);
         expectedinterest = new Money(new BigDecimal(200.0).multiply(monthlyinterestcalc), "dollars");
         assertEquals(expectedinterest, s.calculateMonthlyInterest());
-        assertEquals(s.toString(), "200 dollars");
+        assertEquals(new Money(new BigDecimal(200), "dollars"), s.balance);
         
     }
 }

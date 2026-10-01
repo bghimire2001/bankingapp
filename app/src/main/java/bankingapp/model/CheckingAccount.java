@@ -42,4 +42,15 @@ public class CheckingAccount extends Account{
         }
         System.out.println(memo);
     }
+    @Override 
+    public String toString(){
+        StringBuilder s = new StringBuilder();
+        s.append("===Checking Account===\n");
+        s.append("----------------------\n");
+        s.append("Available Cash Balance: " + balance + "\n");
+        s.append("Overdraft Limit: " + overdraftlimit + "\n");
+        s.append("Current Overdraft Amount: " + overdraftAmount);
+        return s.toString();
+
+    }
 }

@@ -16,5 +16,9 @@ public class App {
         
         Money depositamnt = new Money(new BigDecimal(50), "dollars");
         c.deposit(depositamnt, "HELLO THERE I JUST PUT MONEY");
+        SavingsAccount s = new SavingsAccount(
+            initialdeposit, "dollars", new BigDecimal(2.0));
+        Customer customer = new Customer.Builder("Bipin", "Bipin", "bipin@bipin.com").addAccount(s).addAccount(c).build();
+        System.out.println(customer.toString());
     }
 }

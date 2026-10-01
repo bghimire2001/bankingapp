@@ -29,4 +29,14 @@ public class SavingsAccount extends Account implements InterestBearing{
         BigDecimal monthlyapr = apr.divide(new BigDecimal(1200.0), 10, RoundingMode.HALF_UP);
         return balance.multiply(monthlyapr);
     }
+    @Override 
+    public String toString(){
+        StringBuilder s = new StringBuilder();
+        s.append("===Savings Account===\n");
+        s.append("----------------------\n");
+        s.append("Savings Balance: " + balance + "\n");
+        s.append("APR: " + apr + "%\n");
+        return s.toString();
+
+    }
 }
